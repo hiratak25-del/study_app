@@ -26,7 +26,7 @@
 
 
 
-    <div class="w-5/6 mx-auto flex gap-8 justify-center">
+    <div class="w-5/6 mx-auto flex gap-8 justify-center mb-10">
         <table class="w- full border border-collapse text-center">
             <tr class="border">
                 <th class="border py-2">学習日</th>
@@ -39,7 +39,7 @@
                 <tr class="border">
                     <td class="border px-4 py-2">{{ $studyRecord->study_date }}</td>
                     <td class="border px-4 py-2">{{ $studyRecord->category }}</td>
-                    <td class="border px-4 py-2">{{ $studyRecord->minutes }}</td>
+                    <td class="border px-4 py-2">{{ $studyRecord->minutes }}分</td>
                     <td class="border px-4 py-2">{{ $studyRecord->memo }}</td>
                     <td class=" p-4 border">
                         <div class="flex flex-col gap-3 items-center">

@@ -5,6 +5,7 @@ use App\Http\Controllers\RecordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudyRecordController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CalendarController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,6 +13,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
+
+Route::get('/calendar', [CalendarController::class, 'index'])
+    ->name('calendar');
 
 Route::resource('study-records', StudyRecordController::class);
 
@@ -25,4 +29,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
