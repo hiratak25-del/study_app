@@ -16,6 +16,11 @@ class DashboardController extends Controller
             ->latest('study_date')
             ->get();
 
+        $recentStudyRecords = StudyRecord::where('user_id', auth()->id())
+            ->latest('study_date')
+            ->take(5)
+            ->get();
+
         $monthlyMinutes = StudyRecord::where(
             'user_id',
             auth()->id()
@@ -83,7 +88,7 @@ class DashboardController extends Controller
                 return \Carbon\Carbon::parse($date)->format('Y-m-d');
             })
             ->unique();
-            
+
         $weeklyStudyDays = $weeklyDates->count();
 
         $weeklyRate = min(
@@ -101,7 +106,8 @@ class DashboardController extends Controller
             'achievementMessage',
             'weeklyGoal',
             'weeklyStudyDays',
-            'weeklyRate'
+            'weeklyRate',
+            'recentStudyRecords'
         ));
     }
 }

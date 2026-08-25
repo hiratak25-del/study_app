@@ -55,7 +55,7 @@
             <textarea class="border h-40 py-1 px-2" name="memo">{{ old('memo') }}</textarea>
         </div>
 
-        <button class="bg-green-400 py-2 px-4 rounded-lg text-center mx-auto justify-center block"
+        <button class="bg-green-400 text-white py-2 px-4 rounded-lg text-center mx-auto justify-center block cursor-pointer"
             type="submit">登録する</button>
 
     </form>

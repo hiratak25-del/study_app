@@ -28,7 +28,7 @@
     <div class="w-1/2 mx-auto mb-12">
         <h2 class="text-blue-500 text-xl font-bold mb-1">連続学習日数</h2>
 
-        <p class="mb-1">
+        <p class="mb-5">
             {{ $streak }}日
         </p>
 
@@ -60,7 +60,7 @@
 
         <h2 class="text-blue-500 text-xl font-bold mt-4 mb-1">最近の学習記録</h2>
 
-        @foreach ($studyRecords as $studyRecord)
+        @foreach ($recentStudyRecords as $studyRecord)
             <div>
                 <p class="pb-2">
                     {{ $studyRecord->study_date }}
@@ -72,12 +72,12 @@
     </div>
 
     <div class="flex gap-5 justify-center w-1/2 mx-auto">
-        <a class="w-48 bg-blue-400 py-4 px-4 rounded-full text-xl text-white text-center block mb-10"
+        <a class="w-48 bg-blue-400 py-4 px-4 rounded-full text-white text-center block mb-10"
             href="{{ route('study-records.index') }}">
             学習記録一覧へ
         </a>
 
-        <a class="w-48 bg-green-400 py-4 px-4 rounded-full text-xl text-white text-center block mb-10"
+        <a class="w-48 bg-green-400 py-4 px-4 rounded-full text-white text-center block mb-10"
             href="{{ route('calendar') }}">カレンダーを見る</a>
     </div>
     @yield('content')
