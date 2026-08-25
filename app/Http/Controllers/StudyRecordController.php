@@ -13,6 +13,8 @@ class StudyRecordController extends Controller
     public function index()
     {
         $studyRecords = StudyRecord::where('user_id', auth()->id())->get();
+        $studyRecords = StudyRecord::paginate(5);
+
 
         return view('study-records.index', compact('studyRecords'));
     }

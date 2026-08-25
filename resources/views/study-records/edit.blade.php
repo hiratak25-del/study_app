@@ -73,7 +73,7 @@
             <textarea class="border h-40 px-2 py-1" name="memo">{{ old('memo', $studyRecord->memo) }}</textarea>
         </div>
 
-        <button class="bg-green-400 py-2 px-4 rounded-lg text-center mx-auto justify-center block"
+        <button class="bg-green-400 py-2 px-4 rounded-lg text-center mx-auto justify-center block text-white"
             type="submit">更新する</button>
 
     </form>

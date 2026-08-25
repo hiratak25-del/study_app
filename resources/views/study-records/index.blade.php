@@ -61,8 +61,9 @@
             @endforeach
         </table>
     </div>
-
-
+    <div class="mx-auto flex justify-center mb-5">
+{{ $studyRecords->links() }}
+</div>
     @yield('content')
 
 </body>
