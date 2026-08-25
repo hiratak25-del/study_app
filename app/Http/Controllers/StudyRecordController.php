@@ -84,7 +84,7 @@ class StudyRecordController extends Controller
 
      $validated = $request->validate([
         'study_date' => ['required', 'date'],
-        'category' => ['required'],
+        'category' => ['required', 'in:HTML,CSS,JavaScript,PHP,Laravel,Other'],
         'minutes' => ['required', 'integer', 'min:1'],
         'memo' => ['nullable'],
     ],

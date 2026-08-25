@@ -30,6 +30,17 @@
 @foreach ($dates as $date)
       <div>
             {{ $date->day }}
+
+            @foreach ($studyRecords as $studyRecord )
+
+            @if($studyRecord->study_date == $date->format('Y-m-d'))
+            <p>
+                {{ $studyRecord->category }}
+                {{ $studyRecord->minutes }}分
+            </p>
+            @endif
+            
+            @endforeach
         </div>
 @endforeach
 </div>

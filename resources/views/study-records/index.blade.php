@@ -20,7 +20,7 @@
         </a>
 
         <a class="bg-green-300 p-4 rounded-lg" href="{{ route('dashboard') }}">
-            ダッシュボードへ戻る
+            ダッシュボード
         </a>
     </div>
 
@@ -68,22 +68,3 @@
 </body>
 
 </html>
-<!-- <div>
-                                    <p>学習日：{{ $studyRecord->study_date }}</p>
-                                    <p>カテゴリ：{{ $studyRecord->category }}</p>
-                                    <p>学習時間：{{ $studyRecord->minutes }}分</p>
-                                    <p>メモ：{{ $studyRecord->memo }}</p>
-                                </div> -->
-<!-- <div class="flex-col">
-                            <a href="{{ route('study-records.edit', $studyRecord) }}">
-                                編集
-                            </a>
-
-                            <form action="{{ route('study-records.destroy', $studyRecord) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit">
-                                    削除
-                                </button>
-                            </form> -->
