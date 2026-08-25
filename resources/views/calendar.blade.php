@@ -12,39 +12,88 @@
 
 <body>
 
-   <h1>今月の日付</h1>
+    <div class="max-w-6xl mx-auto px-4 py-8">
 
-   <div class="grid grid-cols-7">
-    <div>日</div>
-    <div>月</div>
-    <div>火</div>
-    <div>水</div>
-    <div>木</div>
-    <div>金</div>
-    <div>土</div>
+        <h1 class="text-3xl font-bold text-center mb-8">
+            {{ $startOfMonth->format('Y年n月') }}
+        </h1>
 
-@for ($i = 0; $i < $startOfMonth->dayOfWeek; $i++)
-    <div></div>
-@endfor
+        <div class="grid grid-cols-7 border-l border-t">
 
-@foreach ($dates as $date)
-      <div>
-            {{ $date->day }}
+            <div class="border-r border-b p-3 text-center font-bold">
+                日
+            </div>
 
-            @foreach ($studyRecords as $studyRecord )
+            <div class="border-r border-b p-3 text-center font-bold">
+                月
+            </div>
 
-            @if($studyRecord->study_date == $date->format('Y-m-d'))
-            <p>
-                {{ $studyRecord->category }}
-                {{ $studyRecord->minutes }}分
-            </p>
-            @endif
-            
+            <div class="border-r border-b p-3 text-center font-bold">
+                火
+            </div>
+
+            <div class="border-r border-b p-3 text-center font-bold">
+                水
+            </div>
+
+            <div class="border-r border-b p-3 text-center font-bold">
+                木
+            </div>
+
+            <div class="border-r border-b p-3 text-center font-bold">
+                金
+            </div>
+
+            <div class="border-r border-b p-3 text-center font-bold">
+                土
+            </div>
+
+        </div>
+        <div class="grid grid-cols-7 border-l">
+            @for ($i = 0; $i < $startOfMonth->dayOfWeek; $i++)
+                <div class="min-h-32 border-r border-b bg-gray-50"></div>
+            @endfor
+
+            @foreach ($dates as $date)
+
+                @php
+                    $dailyRecords = $studyRecords->filter(function ($studyRecord) use ($date) {
+                        return $studyRecord->study_date == $date->format('Y-m-d');
+                    });
+                    $categories = $dailyRecords->groupBy('category');
+                @endphp
+
+                <div class="min-h-32 border-r border-b p-2
+                            @if ($dailyRecords->count() > 0)
+                                bg-blue-50
+                            @else
+                                bg-white
+                            @endif
+                        ">
+
+                    <div class="min-h-auto p-2">
+                        {{ $date->day }}
+                    </div>
+
+                    @foreach ($categories as $category => $records)
+
+                        <p class="text-sm mb-1">
+                            <span class="font-semibold"> {{ $category }}</span>
+                            {{ $records->sum('minutes') }}分
+                        </p>
+                    @endforeach
+                    @if ($dailyRecords->count() > 0)
+                        <p class="mt-3 pt-2 border-t font-bold text-sm">
+                            合計：{{ $dailyRecords->sum('minutes') }}分
+                        </p>
+                    @endif
+
+                </div>
             @endforeach
         </div>
-@endforeach
-</div>
+    </div>
 
+    <a class="w-1/4 bg-blue-400 py-4 px-2 rounded-full text-white text-center block mb-10 justify-center mx-auto" href="{{ route('study-records.index') }}">学習記録一覧に戻る</a>
 </body>
 
 </html>
