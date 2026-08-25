@@ -40,6 +40,11 @@
                     学習記録を登録
                 </a>
 
+                 <a href="{{ route('calendar') }}"
+                   class="text-gray-700 hover:text-blue-600">
+                    カレンダー
+                </a>
+
             </nav>
 
             {{-- ログインユーザー --}}
