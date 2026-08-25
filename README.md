@@ -1,58 +1,260 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 学習記録アプリ
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+日々の学習内容や学習時間を記録し、継続的な学習をサポートするためのWebアプリケーションです。
 
-## About Laravel
+Laravelを使用して、ユーザー認証から学習記録のCRUD、カレンダー表示、学習時間の集計、連続学習日数の表示などを実装しています。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 概要
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+学習した内容を日々記録することで、自分の学習状況を振り返ることができる学習記録アプリです。
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+学習日・カテゴリー・学習時間・メモを登録でき、ダッシュボードでは月間の学習時間や連続学習日数、これまでの学習記録件数などを確認できます。
 
-## Learning Laravel
+また、学習を継続するモチベーションにつながるよう、連続学習日数に応じた達成メッセージも表示しています。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 主な機能
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### ユーザー認証
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+* ユーザー登録
+* ログイン
+* ログアウト
+* ユーザーごとの学習記録管理
 
-## Agentic Development
+ログインしているユーザー自身の学習記録のみを取得・表示するようにしています。
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 学習記録の管理
+
+学習記録について以下の操作ができます。
+
+* 学習記録の登録
+* 学習記録の一覧表示
+* 学習記録の編集
+* 学習記録の削除
+
+登録できる項目：
+
+* 学習日
+* 学習カテゴリー
+* 学習時間（分）
+* メモ
+
+### 学習カテゴリー
+
+以下のカテゴリーを使用して学習内容を分類できます。
+
+* HTML
+* CSS
+* JavaScript
+* PHP
+* Laravel
+
+### ダッシュボード
+
+ダッシュボードでは、現在の学習状況を確認できます。
+
+* 今月の学習時間
+* 連続学習日数
+* 学習記録件数
+* 最近の学習記録
+* 連続学習日数に応じた達成メッセージ
+
+### カレンダー表示
+
+学習記録をカレンダー形式で確認できます。
+
+日付ごとの学習状況を視覚的に確認できるため、学習した日・していない日を把握しやすくしています。
+
+### 学習時間の集計
+
+月間の学習時間を集計し、
+
+* ○時間
+* ○分
+
+のように分かりやすく表示しています。
+
+### 連続学習日数
+
+学習記録の日付をもとに連続して学習した日数を計算し、ダッシュボードに表示しています。
+
+一定の日数を達成した場合には、達成をお祝いするメッセージを表示します。
+
+## 使用技術
+
+| 技術           | 内容                 |
+| ------------ | ------------------ |
+| PHP          | 8.5                |
+| Laravel      | 13                 |
+| SQLite       | データベース             |
+| Tailwind CSS | CSSフレームワーク         |
+| Vite         | フロントエンドビルドツール      |
+| Blade        | Laravelのテンプレートエンジン |
+| Git / GitHub | バージョン管理            |
+
+## データベース
+
+SQLiteを使用しています。
+
+主なテーブル：
+
+### users
+
+ユーザー情報を管理します。
+
+### study_records
+
+学習記録を管理します。
+
+主なカラム：
+
+* `user_id`
+* `study_date`
+* `category`
+* `minutes`
+* `memo`
+
+`study_records.user_id` と `users.id` を関連付け、ユーザーごとに学習記録を管理しています。
+
+## 環境構築
+
+### 1. リポジトリをクローン
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone リポジトリのURL
+cd プロジェクト名
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. PHPパッケージをインストール
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. JavaScriptパッケージをインストール
 
-## Code of Conduct
+```bash
+npm install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 4. `.env` ファイルを作成
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. アプリケーションキーを生成
+
+```bash
+php artisan key:generate
+```
+
+### 6. SQLiteデータベースを作成
+
+```bash
+touch database/database.sqlite
+```
+
+`.env` のデータベース設定をSQLiteにします。
+
+```env
+DB_CONNECTION=sqlite
+```
+
+### 7. マイグレーションを実行
+
+```bash
+php artisan migrate
+```
+
+### 8. Laravelの開発サーバーを起動
+
+```bash
+php artisan serve
+```
+
+### 9. Viteを起動
+
+別のターミナルで以下を実行します。
+
+```bash
+npm run dev
+```
+
+ブラウザから表示されたURLへアクセスしてください。
+
+## 画面構成
+
+### ログイン・ユーザー登録
+
+ユーザー登録・ログインを行います。
+
+### ダッシュボード
+
+学習時間、連続学習日数、学習記録件数、最近の学習記録などを確認できます。
+
+### 学習記録一覧
+
+登録した学習記録を一覧で確認できます。
+
+### 学習記録登録
+
+学習日、カテゴリー、学習時間、メモを入力して学習記録を登録できます。
+
+### カレンダー
+
+日付ごとの学習記録をカレンダー形式で確認できます。
+
+## 工夫したポイント
+
+### ユーザーごとのデータ管理
+
+学習記録にユーザーIDを紐付けることで、ログインしているユーザー自身のデータだけを取得・表示するようにしています。
+
+### 学習時間の分かりやすい表示
+
+データベースでは学習時間を「分」で管理し、画面上では「時間・分」に変換して表示することで、ユーザーが直感的に学習時間を把握できるようにしています。
+
+### 学習の継続を意識したUI
+
+単に学習記録を保存するだけではなく、連続学習日数を表示し、一定の日数を達成した際にはお祝いメッセージを表示することで、学習を続けるモチベーションにつながるようにしています。
+
+### カレンダーによる視覚的な確認
+
+学習記録を一覧だけでなくカレンダー形式でも確認できるようにし、日々の学習状況を視覚的に把握できるようにしています。
+
+## 今後追加したい機能
+
+* 学習カテゴリーごとの学習時間集計
+* 学習時間のグラフ表示
+* 週間・月間の学習目標設定
+* 目標に対する達成率の表示
+* 学習記録の検索・絞り込み
+* UI / UXのさらなる改善
+* レスポンシブ対応の強化
+
+## 開発について
+
+本アプリはLaravelの学習を目的として開発しました。
+
+Laravelの基本的な機能を学習しながら、以下の内容を実際に実装しています。
+
+* ルーティング
+* コントローラー
+* モデル
+* マイグレーション
+* Eloquent ORM
+* リレーション
+* フォーム送信
+* バリデーション
+* CRUD処理
+* ユーザー認証
+* Blade
+* Tailwind CSS
+* Git / GitHub
+
+今後も機能追加やUI改善を行いながら、LaravelおよびWebアプリケーション開発についての理解を深めていく予定です。
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is for learning purposes.

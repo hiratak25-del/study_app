@@ -15,11 +15,11 @@
     <h1 class="text-blue-500 text-center font-bold text-3xl mt-5 mb-6">学習記録一覧</h1>
 
     <div class="flex gap-5 w-1/2 mx-auto justify-center mb-8">
-        <a class="bg-blue-300 p-4 rounded-lg" href="{{ route('study-records.create') }}">
+        <a class="text-white bg-blue-400 p-4 rounded-lg" href="{{ route('study-records.create') }}">
             学習記録を追加
         </a>
 
-        <a class="bg-green-300 p-4 rounded-lg" href="{{ route('dashboard') }}">
+        <a class="text-white bg-green-400 p-4 rounded-lg" href="{{ route('dashboard') }}">
             ダッシュボード
         </a>
     </div>
