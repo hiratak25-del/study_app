@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>学習記録アプリ</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+@section('content')
 
     <h1 class="text-blue-500 text-center font-bold text-3xl mt-5 mb-6">学習記録一覧</h1>
 
@@ -64,8 +54,5 @@
     <div class="mx-auto flex justify-center mb-5">
 {{ $studyRecords->links() }}
 </div>
-    @yield('content')
 
-</body>
-
-</html>
+@endsection

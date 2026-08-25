@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>学習カレンダー</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+@section('content')
 
     <div class="max-w-6xl mx-auto px-4 py-8">
 
@@ -94,6 +84,4 @@
     </div>
 
     <a class="w-1/4 bg-blue-400 py-4 px-2 rounded-full text-white text-center block mb-10 justify-center mx-auto" href="{{ route('study-records.index') }}">学習記録一覧に戻る</a>
-</body>
-
-</html>
+@endsection

@@ -1,36 +1,75 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="ja">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="UTF-8">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <title>学習記録アプリ</title>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+<body class="bg-gray-100">
+
+    <header class="bg-white shadow">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+            {{-- アプリ名 --}}
+            <a href="{{ route('dashboard') }}"
+               class="text-xl font-bold text-blue-600">
+                学習記録
+            </a>
+
+            {{-- ナビゲーション --}}
+            <nav class="flex items-center gap-5">
+
+                <a href="{{ route('dashboard') }}"
+                   class="text-gray-700 hover:text-blue-600">
+                    ダッシュボード
+                </a>
+
+                <a href="{{ route('study-records.index') }}"
+                   class="text-gray-700 hover:text-blue-600">
+                    一覧
+                </a>
+
+                <a href="{{ route('study-records.create') }}"
+                   class="text-gray-700 hover:text-blue-600">
+                    学習記録を登録
+                </a>
+
+            </nav>
+
+            {{-- ログインユーザー --}}
+            <div class="flex items-center gap-4">
+
+                <span class="text-sm text-gray-600">
+                    こんにちは、{{ auth()->user()->name }}さん
+                </span>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <button type="submit"
+                            class="rounded-lg bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300 cursor-pointer">
+                        ログアウト
+                    </button>
+                </form>
+
+            </div>
+
         </div>
-    </body>
+    </header>
+
+    {{-- 各ページの内容 --}}
+    <main class="mx-auto max-w-6xl px-6 py-8">
+
+        @yield('content')
+
+    </main>
+
+</body>
+
 </html>

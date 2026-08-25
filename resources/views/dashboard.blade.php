@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>学習記録アプリ</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+@section('content')
     <div class="max-full bg-white mb-10">
         <h1 class="text-center text-gray-600 text-xl mt-4">学習記録ダッシュボード</h1>
 
@@ -80,8 +70,5 @@
         <a class="w-48 bg-green-400 py-4 px-4 rounded-full text-white text-center block mb-10"
             href="{{ route('calendar') }}">カレンダーを見る</a>
     </div>
-    @yield('content')
 
-</body>
-
-</html>
+@endsection

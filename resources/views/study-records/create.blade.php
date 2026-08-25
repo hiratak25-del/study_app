@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>学習記録アプリ</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+@section('content')
 
     <h1 class="text-gray-500 font-bold text-3xl text-center my-5">学習記録登録</h1>
 
@@ -60,8 +50,4 @@
 
     </form>
 
-    @yield('content')
-
-</body>
-
-</html>
+@endsection
