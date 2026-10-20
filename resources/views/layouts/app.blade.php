@@ -23,7 +23,7 @@
             </a>
 
             {{-- ナビゲーション --}}
-            <nav class="flex items-center gap-15">
+            <nav class="flex items-center gap-10">
 
                 <a href="{{ route('dashboard') }}"
                    class="text-gray-700 hover:text-blue-600">
