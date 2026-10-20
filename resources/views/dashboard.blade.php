@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="max-full bg-white mb-10">
-        <h1 class="text-center text-gray-600 text-xl mt-4">学習記録ダッシュボード</h1>
+        <h1 class="text-center text-gray-600 text-xl pt-4">学習記録ダッシュボード</h1>
 
         <div class="rounded-xl p-6 shadow">
             <h2 class="text-sm font-medium text-gray-500 text-center">
@@ -62,12 +62,12 @@
     </div>
 
     <div class="flex gap-5 justify-center w-1/2 mx-auto">
-        <a class="w-48 bg-blue-400 py-4 px-4 rounded-full text-white text-center block mb-10"
+        <a class="w-48 bg-blue-400 h-15 py-4 px-4 rounded-full text-white text-center block tracking-tight"
             href="{{ route('study-records.index') }}">
             学習記録一覧へ
         </a>
 
-        <a class="w-48 bg-green-400 py-4 px-4 rounded-full text-white text-center block mb-10"
+        <a class="w-48 bg-green-400 h-15 py-4 px-4 rounded-full text-white text-center block mb-10 tracking-tighter"
             href="{{ route('calendar') }}">カレンダーを見る</a>
     </div>
 
