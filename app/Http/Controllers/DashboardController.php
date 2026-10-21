@@ -73,14 +73,9 @@ class DashboardController extends Controller
 
         $weeklyGoal = 5;
 
-        $weeklyRecords = StudyRecord::where(
-            'user_id',
-            auth()->id()
-        )
-            ->whereBetween('study_date', [
-                now()->startOfWeek(),
-                now()->endOfWeek()
-            ])
+        $weeklyRecords = StudyRecord::where('user_id', auth()->id())
+            ->whereDate('study_date', '>=', now()->startOfWeek()->toDateString())
+            ->whereDate('study_date', '<=', now()->endOfWeek()->toDateString())
             ->get();
         $weeklyDates = $weeklyRecords
             ->pluck('study_date')
@@ -90,7 +85,6 @@ class DashboardController extends Controller
             ->unique();
 
         $weeklyStudyDays = $weeklyDates->count();
-
         $weeklyRate = min(
             100,
             round(($weeklyStudyDays / $weeklyGoal) * 100)
