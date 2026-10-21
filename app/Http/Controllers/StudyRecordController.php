@@ -12,9 +12,10 @@ class StudyRecordController extends Controller
      */
     public function index()
     {
-        $studyRecords = StudyRecord::where('user_id', auth()->id())->get();
-        $studyRecords = StudyRecord::paginate(5);
-
+        $studyRecords = StudyRecord::where('user_id', auth()->id())
+            ->orderBy('study_date', 'desc')
+            ->orderBy('id', 'desc')
+            ->paginate(5);
 
         return view('study-records.index', compact('studyRecords'));
     }
@@ -33,20 +34,20 @@ class StudyRecordController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'study_date'=> ['required','date'],
-            'category'=>['required'],
-            'minutes'=>['required','integer','min:1'],
-            'memo'=>['nullable'],
-        ],[
+            'study_date' => ['required', 'date'],
+            'category' => ['required'],
+            'minutes' => ['required', 'integer', 'min:1'],
+            'memo' => ['nullable'],
+        ], [
 
-        'study_date.required' => '学習日は必ず入力してください。',
-        'study_date.date' => '学習日には正しい日付を入力してください。',
+            'study_date.required' => '学習日は必ず入力してください。',
+            'study_date.date' => '学習日には正しい日付を入力してください。',
 
-        'category.required' => 'カテゴリは必ず入力してください。',
+            'category.required' => 'カテゴリは必ず入力してください。',
 
-        'minutes.required' => '学習時間は必ず入力してください。',
-        'minutes.integer' => '学習時間は整数で入力してください。',
-        'minutes.min' => '学習時間は1分以上で入力してください。',
+            'minutes.required' => '学習時間は必ず入力してください。',
+            'minutes.integer' => '学習時間は整数で入力してください。',
+            'minutes.min' => '学習時間は1分以上で入力してください。',
         ]);
         $studyRecord = StudyRecord::create([
             'user_id' => auth()->id(),
@@ -72,10 +73,10 @@ class StudyRecordController extends Controller
     public function edit(StudyRecord $studyRecord)
     {
         if ($studyRecord->user_id !== auth()->id()) {
-        abort(403);
-    }
+            abort(403);
+        }
 
-    return view('study-records.edit', compact('studyRecord'));
+        return view('study-records.edit', compact('studyRecord'));
     }
 
     /**
@@ -84,26 +85,28 @@ class StudyRecordController extends Controller
     public function update(Request $request, StudyRecord $studyRecord)
     {
 
-     $validated = $request->validate([
-        'study_date' => ['required', 'date'],
-        'category' => ['required', 'in:HTML,CSS,JavaScript,PHP,Laravel,Other'],
-        'minutes' => ['required', 'integer', 'min:1'],
-        'memo' => ['nullable'],
-    ],
-    [
+        $validated = $request->validate(
+            [
+                'study_date' => ['required', 'date'],
+                'category' => ['required', 'in:HTML,CSS,JavaScript,PHP,Laravel,Other'],
+                'minutes' => ['required', 'integer', 'min:1'],
+                'memo' => ['nullable'],
+            ],
+            [
 
-        'study_date.required' => '学習日は必ず入力してください。',
-        'study_date.date' => '学習日には正しい日付を入力してください。',
+                'study_date.required' => '学習日は必ず入力してください。',
+                'study_date.date' => '学習日には正しい日付を入力してください。',
 
-        'category.required' => 'カテゴリは必ず入力してください。',
+                'category.required' => 'カテゴリは必ず入力してください。',
 
-        'minutes.required' => '学習時間は必ず入力してください。',
-        'minutes.integer' => '学習時間は整数で入力してください。',
-        'minutes.min' => '学習時間は1分以上で入力してください。',
-    ]);
-        if($studyRecord->user_id !== auth()->id()){
+                'minutes.required' => '学習時間は必ず入力してください。',
+                'minutes.integer' => '学習時間は整数で入力してください。',
+                'minutes.min' => '学習時間は1分以上で入力してください。',
+            ]
+        );
+        if ($studyRecord->user_id !== auth()->id()) {
             abort(403);
-    }
+        }
         $studyRecord->update([
             'study_date' => $request->study_date,
             'category' => $request->category,
@@ -120,9 +123,9 @@ class StudyRecordController extends Controller
     public function destroy(StudyRecord $studyRecord)
     {
 
-     if($studyRecord->user_id !== auth()->id()){
+        if ($studyRecord->user_id !== auth()->id()) {
             abort(403);
-    }
+        }
 
         $studyRecord->delete();
 

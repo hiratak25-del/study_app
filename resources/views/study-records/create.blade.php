@@ -25,7 +25,7 @@
                 <option value="JavaScript">JavaScript</option>
                 <option value="PHP">PHP</option>
                 <option value="Laravel">Laravel</option>
-                <option value="PHP">Other</option>
+                <option value="Other">Other</option>
             </select>
             @error('category')
                 <p>{{ $message }}</p>
